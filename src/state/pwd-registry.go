@@ -1,43 +1,38 @@
 package state
 
+import "fmt"
+
 const INVALID_PID = -1
 
 type PwdRegistry struct {
-	currentPid int
-	pwdMap     map[int]string
+	currentPwd string
+	currentApp string
 }
 
 func NewPwdRegistry() *PwdRegistry {
 	return &PwdRegistry{
-		currentPid: INVALID_PID,
-		pwdMap:     make(map[int]string),
+		currentPwd: "~/",
+		currentApp: "",
 	}
 }
 
-func (r *PwdRegistry) UpsertEntry(pid int, pwd string) {
-	r.pwdMap[pid] = pwd
-}
-
-func (r *PwdRegistry) DeleteEntry(pid int) {
-	delete(r.pwdMap, pid)
-}
-
-func (r *PwdRegistry) GetPwd(pid int) string {
-	return r.pwdMap[pid]
-}
-
-func (r *PwdRegistry) UpdateCurrentPid(pid int) {
-	r.currentPid = pid
-}
-
-func (r *PwdRegistry) GetCurrentPid() int {
-	return r.currentPid
-}
-
-func (r *PwdRegistry) GetCurrentPidPwd() string {
-	if r.currentPid == INVALID_PID {
-		return ""
+func (r *PwdRegistry) GetCurrentPwd() string {
+	if r.currentApp != "Alacritty" {
+		return "~/"
 	}
+	return r.currentPwd
+}
 
-	return r.GetPwd(r.currentPid)
+func (r *PwdRegistry) UpdateCurrentPwd(pwd string) {
+	fmt.Println("UPDATING PWD")
+	r.currentPwd = pwd
+	fmt.Println("PWD: " + r.currentPwd)
+}
+
+func (r *PwdRegistry) GetCurrentApp() string {
+	return r.currentApp
+}
+
+func (r *PwdRegistry) UpdateCurrentApp(app string) {
+	r.currentApp = app
 }
