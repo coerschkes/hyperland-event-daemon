@@ -1,7 +1,5 @@
 package state
 
-import "fmt"
-
 const INVALID_PID = -1
 
 type PwdRegistry struct {
@@ -24,9 +22,7 @@ func (r *PwdRegistry) GetCurrentPwd() string {
 }
 
 func (r *PwdRegistry) UpdateCurrentPwd(pwd string) {
-	fmt.Println("UPDATING PWD")
 	r.currentPwd = pwd
-	fmt.Println("PWD: " + r.currentPwd)
 }
 
 func (r *PwdRegistry) GetCurrentApp() string {

@@ -64,7 +64,6 @@ func (s *SocketServer) handleConnection(conn net.Conn) {
 					break
 				}
 				if result != "" {
-					fmt.Println("RESULT: " + result)
 					writer.WriteString(result)
 					writer.Flush()
 				}
