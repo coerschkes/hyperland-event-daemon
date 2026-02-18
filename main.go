@@ -14,6 +14,7 @@ func main() {
 	hyprlandEventObserver := hyprland.EventObserver{
 		EventHandlers: []hyprland.EventHandler{
 			event_handlers.NewFocusedWindowHandler(pwdRegistry),
+			event_handlers.NewMouseSensitivityFixHandler(),
 		},
 	}
 
