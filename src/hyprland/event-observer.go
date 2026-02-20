@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"slices"
+
+	"github.com/coerschkes/hyprland-event-daemon/src/hyprland/domain"
 )
 
 type EventObserver struct {
@@ -22,10 +25,14 @@ func (o *EventObserver) Start() {
 
 	scanner := bufio.NewScanner(conn)
 	for scanner.Scan() {
+		event := domain.NewHyprlandEvent(scanner.Text())
+
 		for _, h := range o.EventHandlers {
-			err := h.Handle(scanner.Text())
-			if err != nil {
-				fmt.Println("Error: ", err)
+			if slices.Contains(h.Types(), event.Type) {
+				err := h.OnEventReceived(event)
+				if err != nil {
+					fmt.Println("Error: ", err)
+				}
 			}
 		}
 	}
@@ -33,5 +40,4 @@ func (o *EventObserver) Start() {
 	if err := scanner.Err(); err != nil {
 		fmt.Println("Error:", err)
 	}
-
 }

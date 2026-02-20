@@ -1,5 +1,6 @@
 package hyprland
 
-type EventHandler interface {
-	Handle(event string) error
+type Configuration struct {
+	Key   string
+	Value string
 }
