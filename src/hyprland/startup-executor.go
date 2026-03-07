@@ -6,7 +6,7 @@ type StartupExecutor struct {
 	StartupHandlers []StartupHandler
 }
 
-func (s *StartupExecutor) Start() {
+func (s *StartupExecutor) Execute() {
 	for _, handler := range s.StartupHandlers {
 		err := handler.OnStartup()
 		if err != nil {

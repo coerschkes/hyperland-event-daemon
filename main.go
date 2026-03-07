@@ -18,20 +18,23 @@ func main() {
 	monitorHandler := handlers.NewMonitorHandler(hyprctl)
 	debugHandler := handlers.NewDebugHandler()
 
+	hyprlandStartupExecutor := hyprland.StartupExecutor{
+		StartupHandlers: []hyprland.StartupHandler{
+			mouseHandler,
+			monitorHandler,
+		},
+	}
+
+	configReloadedHandler := handlers.NewConfigReloadedHandler(&hyprlandStartupExecutor)
+
 	hyprlandEventObserver := hyprland.EventObserver{
 		EventHandlers: []hyprland.EventHandler{
 			focusedWindowHandler,
 			mouseHandler,
 			monitorHandler,
 			debugHandler,
+			configReloadedHandler,
 			unknownHandler,
-		},
-	}
-
-	hyprlandStartupExecutor := hyprland.StartupExecutor{
-		StartupHandlers: []hyprland.StartupHandler{
-			mouseHandler,
-			monitorHandler,
 		},
 	}
 
@@ -41,7 +44,7 @@ func main() {
 		},
 	}
 
-	go hyprlandStartupExecutor.Start()
+	go hyprlandStartupExecutor.Execute()
 	go hyprlandEventObserver.Start()
 	socketServer.Start()
 }

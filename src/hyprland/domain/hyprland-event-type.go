@@ -2,7 +2,7 @@ package domain
 
 //go:generate go tool go-enum -f $GOFILE
 
-// ENUM(activewindow, activewindowv2, activelayout, workspace, moveworkspace, moveworkspacev2, monitoradded, monitoraddedv2, monitorremoved, monitorremovedv2, focusedmon, focusedmonv2, openlayer, destroyworkspace, destroyworkspacev2, unknown)
+// ENUM(activewindow, activewindowv2, activelayout, workspace, moveworkspace, moveworkspacev2, monitoradded, monitoraddedv2, monitorremoved, monitorremovedv2, focusedmon, focusedmonv2, openlayer, destroyworkspace, destroyworkspacev2, configreloaded, unknown)
 type HyprlandEventType string
 
 func AllHyprlandEventTypes() []HyprlandEventType {

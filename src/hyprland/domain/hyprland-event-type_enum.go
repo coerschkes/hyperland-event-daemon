@@ -41,6 +41,8 @@ const (
 	HyprlandEventTypeDestroyworkspace HyprlandEventType = "destroyworkspace"
 	// HyprlandEventTypeDestroyworkspacev2 is a HyprlandEventType of type destroyworkspacev2.
 	HyprlandEventTypeDestroyworkspacev2 HyprlandEventType = "destroyworkspacev2"
+	// HyprlandEventTypeConfigreloaded is a HyprlandEventType of type configreloaded.
+	HyprlandEventTypeConfigreloaded HyprlandEventType = "configreloaded"
 	// HyprlandEventTypeUnknown is a HyprlandEventType of type unknown.
 	HyprlandEventTypeUnknown HyprlandEventType = "unknown"
 )
@@ -75,6 +77,7 @@ var _HyprlandEventTypeValue = map[string]HyprlandEventType{
 	"openlayer":          HyprlandEventTypeOpenlayer,
 	"destroyworkspace":   HyprlandEventTypeDestroyworkspace,
 	"destroyworkspacev2": HyprlandEventTypeDestroyworkspacev2,
+	"configreloaded":     HyprlandEventTypeConfigreloaded,
 	"unknown":            HyprlandEventTypeUnknown,
 }
 
