@@ -16,7 +16,7 @@ func NewMouseHandler(deviceProvider hyprland.DeviceProvider) *MouseHandler {
 }
 
 func (h *MouseHandler) Types() []domain.HyprlandEventType {
-	return []domain.HyprlandEventType{domain.ActiveLayout}
+	return []domain.HyprlandEventType{domain.HyprlandEventTypeActivelayout}
 }
 
 func (h *MouseHandler) OnStartup() error {

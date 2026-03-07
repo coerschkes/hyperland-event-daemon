@@ -16,7 +16,7 @@ func NewFocusedWindowHandler(registry *state.PwdRegistry) *FocusedWindowHandler 
 }
 
 func (h *FocusedWindowHandler) Types() []domain.HyprlandEventType {
-	return []domain.HyprlandEventType{domain.ActiveWindow}
+	return []domain.HyprlandEventType{domain.HyprlandEventTypeActivewindow}
 }
 
 func (h *FocusedWindowHandler) OnEventReceived(event domain.HyprlandEvent) error {

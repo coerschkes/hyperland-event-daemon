@@ -13,7 +13,7 @@ func NewDebugHandler() *DebugHandler {
 }
 
 func (h *DebugHandler) Types() []domain.HyprlandEventType {
-	return domain.AllHyprlandEventTypes
+	return domain.AllHyprlandEventTypes()
 }
 
 func (h *DebugHandler) OnEventReceived(event domain.HyprlandEvent) error {

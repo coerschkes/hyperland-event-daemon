@@ -20,7 +20,7 @@ func NewMonitorHandler(monitorProvider hyprland.MonitorProvider) *MonitorHandler
 }
 
 func (h *MonitorHandler) Types() []domain.HyprlandEventType {
-	return []domain.HyprlandEventType{domain.MonitorAdded, domain.MonitorRemoved}
+	return []domain.HyprlandEventType{domain.HyprlandEventTypeMonitoradded, domain.HyprlandEventTypeMonitorremoved}
 }
 
 func (h *MonitorHandler) OnEventReceived(event domain.HyprlandEvent) error {
@@ -29,7 +29,7 @@ func (h *MonitorHandler) OnEventReceived(event domain.HyprlandEvent) error {
 		return nil
 	}
 
-	if event.Type == domain.MonitorAdded {
+	if event.Type == domain.HyprlandEventTypeMonitoradded {
 		err := h.handleMonitorAdded(monitorName)
 		if err != nil {
 			return err

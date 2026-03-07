@@ -13,7 +13,7 @@ func NewUnknownHandler() *UnknownHandler {
 }
 
 func (h *UnknownHandler) Types() []domain.HyprlandEventType {
-	return []domain.HyprlandEventType{domain.Unknown}
+	return []domain.HyprlandEventType{domain.HyprlandEventTypeUnknown}
 }
 
 func (h *UnknownHandler) OnEventReceived(event domain.HyprlandEvent) error {

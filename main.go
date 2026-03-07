@@ -20,11 +20,11 @@ func main() {
 
 	hyprlandEventObserver := hyprland.EventObserver{
 		EventHandlers: []hyprland.EventHandler{
-			unknownHandler,
 			focusedWindowHandler,
 			mouseHandler,
 			monitorHandler,
 			debugHandler,
+			unknownHandler,
 		},
 	}
 

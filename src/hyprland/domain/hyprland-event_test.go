@@ -17,12 +17,12 @@ func TestNewHyprlandEvent(t *testing.T) {
 		input string
 		want  expected
 	}{
-		{"activewindow>>Alacritty,test@archdev:~/dev", expected{eventType: ActiveWindow, payload: []string{"Alacritty", "test@archdev:~/dev"}}},
-		{"activewindowv2>>56127669d000", expected{eventType: ActiveWindowV2, payload: []string{"56127669d000"}}},
-		{"activewindow>>", expected{eventType: ActiveWindow, payload: []string{""}}},
-		{"activewindow", expected{eventType: ActiveWindow, payload: []string{}}},
-		{"foo", expected{eventType: Unknown, payload: []string{}}},
-		{"foo>>bar", expected{eventType: Unknown, payload: []string{"bar"}}},
+		{"activewindow>>Alacritty,test@archdev:~/dev", expected{eventType: HyprlandEventTypeActivewindow, payload: []string{"Alacritty", "test@archdev:~/dev"}}},
+		{"activewindowv2>>56127669d000", expected{eventType: HyprlandEventTypeActivewindowv2, payload: []string{"56127669d000"}}},
+		{"activewindow>>", expected{eventType: HyprlandEventTypeActivewindow, payload: []string{""}}},
+		{"activewindow", expected{eventType: HyprlandEventTypeActivewindow, payload: []string{}}},
+		{"foo", expected{eventType: HyprlandEventTypeUnknown, payload: []string{}}},
+		{"foo>>bar", expected{eventType: HyprlandEventTypeUnknown, payload: []string{"bar"}}},
 		{"", expected{}},
 	}
 
