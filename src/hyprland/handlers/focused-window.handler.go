@@ -21,19 +21,26 @@ func (h *FocusedWindowHandler) Types() []domain.HyprlandEventType {
 
 func (h *FocusedWindowHandler) OnEventReceived(event domain.HyprlandEvent) error {
 	currentApplication := event.Payload[0]
-	currentPwd := h.getCurrentPwd(event.Payload[1])
+	currentPwd, update := h.getCurrentPwd(event.Payload[1])
 
-	h.pwdRegistry.UpdateCurrentApp(currentApplication)
-	h.pwdRegistry.UpdateCurrentPwd(currentPwd)
+	if update {
+		h.pwdRegistry.UpdateCurrentApp(currentApplication)
+		h.pwdRegistry.UpdateCurrentPwd(currentPwd)
+	}
 
 	return nil
 }
 
-func (h *FocusedWindowHandler) getCurrentPwd(event string) string {
+func (h *FocusedWindowHandler) getCurrentPwd(event string) (string, bool) {
 	pwd := strings.Split(event, ":")
 	if len(pwd) == 1 {
-		return ""
+		return "", true
 	}
 
-	return pwd[1]
+	if !strings.Contains(pwd[0], "core@archdev") {
+		println("Not on host machine, skipping updating")
+		return "", false
+	}
+
+	return pwd[1], true
 }
