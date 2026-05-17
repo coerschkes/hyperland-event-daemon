@@ -3,7 +3,6 @@ package handlers
 import (
 	"fmt"
 	"os/exec"
-	"time"
 
 	"github.com/coerschkes/hyprland-event-daemon/src/hyprland"
 	"github.com/coerschkes/hyprland-event-daemon/src/hyprland/domain"
@@ -41,7 +40,7 @@ func (h *MonitorHandler) OnEventReceived(event domain.HyprlandEvent) error {
 		}
 	}
 
-	go h.restartWaybar()
+	go h.restartStatusbar()
 
 	return nil
 }
@@ -92,9 +91,8 @@ func (h *MonitorHandler) handleMonitorRemoved() error {
 	return nil
 }
 
-func (h *MonitorHandler) restartWaybar() {
-	time.Sleep(7 * time.Second)
-
-	fmt.Println("Restarting waybar")
-	exec.Command("systemctl", "--user", "kill", "-s", "SIGUSR2", "waybar.service")
+func (h *MonitorHandler) restartStatusbar() {
+	// time.Sleep(7 * time.Second)
+	fmt.Println("Restarting statusbar")
+	exec.Command("/home/core/dev/projects/arch-custom/ags-widgets/restart.sh")
 }
