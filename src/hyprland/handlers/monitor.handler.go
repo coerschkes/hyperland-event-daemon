@@ -92,8 +92,7 @@ func (h *MonitorHandler) handleMonitorRemoved() error {
 }
 
 func (h *MonitorHandler) restartStatusbar() {
-	fmt.Println("Restarting statusbar")
-	err := exec.Command("/home/core/dev/projects/arch-custom/ags-widgets/restart.sh").Run()
+	err := exec.Command("systemctl", "--user", "restart", "ags-widgets").Run()
 	if err != nil {
 		fmt.Println(err)
 	}
