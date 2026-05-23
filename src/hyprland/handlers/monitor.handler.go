@@ -19,7 +19,7 @@ func NewMonitorHandler(monitorProvider hyprland.MonitorProvider) *MonitorHandler
 }
 
 func (h *MonitorHandler) Types() []domain.HyprlandEventType {
-	return []domain.HyprlandEventType{domain.HyprlandEventTypeMonitoradded, domain.HyprlandEventTypeMonitorremoved}
+	return []domain.HyprlandEventType{domain.HyprlandEventTypeMonitoradded, domain.HyprlandEventTypeMonitorremoved, domain.HyprlandEventTypeMoveworkspace, domain.HyprlandEventTypeMoveworkspacev2}
 }
 
 func (h *MonitorHandler) OnEventReceived(event domain.HyprlandEvent) error {
@@ -92,7 +92,9 @@ func (h *MonitorHandler) handleMonitorRemoved() error {
 }
 
 func (h *MonitorHandler) restartStatusbar() {
-	// time.Sleep(7 * time.Second)
 	fmt.Println("Restarting statusbar")
-	exec.Command("/home/core/dev/projects/arch-custom/ags-widgets/restart.sh")
+	err := exec.Command("/home/core/dev/projects/arch-custom/ags-widgets/restart.sh").Run()
+	if err != nil {
+		fmt.Println(err)
+	}
 }
