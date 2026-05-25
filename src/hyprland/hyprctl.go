@@ -15,7 +15,7 @@ func NewHyprctl() *Hyprctl {
 }
 
 func (h *Hyprctl) GetMonitors() ([]domain.Monitor, error) {
-	cmd := exec.Command("hyprctl", "-j", "monitors")
+	cmd := exec.Command("hyprctl", "-j", "monitors", "all")
 	output, err := cmd.Output()
 	if err != nil {
 		return []domain.Monitor{}, err
@@ -66,6 +66,20 @@ func (h *Hyprctl) SetDeviceConfiguration(name string, deviceConfiguration Config
 		"keyword",
 		"device["+name+"]:"+deviceConfiguration.Key,
 		deviceConfiguration.Value,
+	)
+
+	_, err := cmd.CombinedOutput()
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (h *Hyprctl) Reload() error {
+	cmd := exec.Command(
+		"hyprctl",
+		"reload",
 	)
 
 	_, err := cmd.CombinedOutput()

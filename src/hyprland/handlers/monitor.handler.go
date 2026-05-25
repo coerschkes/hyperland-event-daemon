@@ -19,7 +19,7 @@ func NewMonitorHandler(monitorProvider hyprland.MonitorProvider) *MonitorHandler
 }
 
 func (h *MonitorHandler) Types() []domain.HyprlandEventType {
-	return []domain.HyprlandEventType{domain.HyprlandEventTypeMonitoradded, domain.HyprlandEventTypeMonitorremoved, domain.HyprlandEventTypeMoveworkspace, domain.HyprlandEventTypeMoveworkspacev2}
+	return []domain.HyprlandEventType{domain.HyprlandEventTypeMonitoradded, domain.HyprlandEventTypeMonitorremoved}
 }
 
 func (h *MonitorHandler) OnEventReceived(event domain.HyprlandEvent) error {
@@ -80,12 +80,18 @@ func (h *MonitorHandler) handleMonitorAdded(monitorName string) error {
 
 func (h *MonitorHandler) handleMonitorRemoved() error {
 	monitors, err := h.monitorProvider.GetMonitors()
+
 	if err != nil {
 		return err
 	}
 
-	if len(monitors) == 0 {
-		return h.monitorProvider.SetMonitorConfiguration([]string{internalMonitor, "1920x1200@60", "0x0", "1.25"})
+	if len(monitors) == 1 {
+		err := h.monitorProvider.SetMonitorConfiguration([]string{internalMonitor, "preferred", "auto", "1.25"})
+		if err != nil {
+			return err
+		}
+
+		return h.monitorProvider.Reload()
 	}
 
 	return nil

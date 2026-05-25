@@ -18,9 +18,11 @@ type StartupHandler interface {
 type MonitorProvider interface {
 	GetMonitors() ([]domain.Monitor, error)
 	SetMonitorConfiguration(configuration []string) error
+	Reload() error
 }
 
 type DeviceProvider interface {
 	GetDevices() (domain.Devices, error)
 	SetDeviceConfiguration(name string, deviceConfiguration Configuration) error
+	Reload() error
 }
