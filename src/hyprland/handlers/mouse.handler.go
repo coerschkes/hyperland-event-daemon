@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"slices"
+	"strings"
 
 	"github.com/coerschkes/hyprland-event-daemon/src/hyprland"
 	"github.com/coerschkes/hyprland-event-daemon/src/hyprland/domain"
@@ -33,7 +34,8 @@ func (h *MouseHandler) OnStartup() error {
 }
 
 func (h *MouseHandler) OnEventReceived(event domain.HyprlandEvent) error {
-	if event.Payload[0] == "razer-razer-viper-v3-pro" {
+	payload := event.Payload[0]
+	if strings.Contains(payload, "razer-viper-v3-pro") {
 		return h.setMouseSensitivity()
 	}
 
