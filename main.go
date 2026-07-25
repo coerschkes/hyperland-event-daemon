@@ -10,17 +10,13 @@ import (
 
 func main() {
 	pwdRegistry := state.NewPwdRegistry()
-	hyprctl := hyprland.NewHyprctl()
 
 	unknownHandler := handlers.NewUnknownHandler()
 	focusedWindowHandler := handlers.NewFocusedWindowHandler(pwdRegistry)
-	mouseHandler := handlers.NewMouseHandler(hyprctl)
 	debugHandler := handlers.NewDebugHandler()
 
 	hyprlandStartupExecutor := hyprland.StartupExecutor{
-		StartupHandlers: []hyprland.StartupHandler{
-			mouseHandler,
-		},
+		StartupHandlers: []hyprland.StartupHandler{},
 	}
 
 	configReloadedHandler := handlers.NewConfigReloadedHandler(&hyprlandStartupExecutor)
@@ -28,7 +24,6 @@ func main() {
 	hyprlandEventObserver := hyprland.EventObserver{
 		EventHandlers: []hyprland.EventHandler{
 			focusedWindowHandler,
-			mouseHandler,
 			debugHandler,
 			configReloadedHandler,
 			unknownHandler,

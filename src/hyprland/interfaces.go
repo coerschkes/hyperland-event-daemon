@@ -14,9 +14,3 @@ type EventHandler interface {
 type StartupHandler interface {
 	OnStartup() error
 }
-
-type DeviceProvider interface {
-	GetDevices() (domain.Devices, error)
-	SetDeviceConfiguration(name string, deviceConfiguration Configuration) error
-	Reload() error
-}
