@@ -15,13 +15,11 @@ func main() {
 	unknownHandler := handlers.NewUnknownHandler()
 	focusedWindowHandler := handlers.NewFocusedWindowHandler(pwdRegistry)
 	mouseHandler := handlers.NewMouseHandler(hyprctl)
-	monitorHandler := handlers.NewMonitorHandler(hyprctl)
 	debugHandler := handlers.NewDebugHandler()
 
 	hyprlandStartupExecutor := hyprland.StartupExecutor{
 		StartupHandlers: []hyprland.StartupHandler{
 			mouseHandler,
-			monitorHandler,
 		},
 	}
 
@@ -31,7 +29,6 @@ func main() {
 		EventHandlers: []hyprland.EventHandler{
 			focusedWindowHandler,
 			mouseHandler,
-			monitorHandler,
 			debugHandler,
 			configReloadedHandler,
 			unknownHandler,

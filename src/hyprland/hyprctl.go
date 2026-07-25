@@ -3,7 +3,6 @@ package hyprland
 import (
 	"encoding/json"
 	"os/exec"
-	"strings"
 
 	"github.com/coerschkes/hyprland-event-daemon/src/hyprland/domain"
 )
@@ -12,34 +11,6 @@ type Hyprctl struct{}
 
 func NewHyprctl() *Hyprctl {
 	return &Hyprctl{}
-}
-
-func (h *Hyprctl) GetMonitors() ([]domain.Monitor, error) {
-	cmd := exec.Command("hyprctl", "-j", "monitors", "all")
-	output, err := cmd.Output()
-	if err != nil {
-		return []domain.Monitor{}, err
-	}
-
-	var monitors []domain.Monitor
-	if err := json.Unmarshal(output, &monitors); err != nil {
-		return []domain.Monitor{}, err
-	}
-
-	return monitors, nil
-}
-
-func (h *Hyprctl) SetMonitorConfiguration(configuration []string) error {
-	cmd := exec.Command(
-		"hyprctl",
-		"keyword",
-		"monitor",
-		strings.Join(configuration, ","),
-	)
-
-	_, err := cmd.CombinedOutput()
-
-	return err
 }
 
 func (h *Hyprctl) GetDevices() (domain.Devices, error) {
